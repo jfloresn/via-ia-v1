@@ -7,7 +7,7 @@ import io
 app = FastAPI()
 
 # Cargar modelo una sola vez
-model = load_model("modelo_resnet.h5")  # O "modelo.h5"
+model = load_model("grape_model.h5")  # O "modelo.h5"
 img_size = (160, 160)
 
 @app.post("/predict")
