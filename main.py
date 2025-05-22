@@ -20,6 +20,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
+
 # Cargar modelo una sola vez
 model = load_model("grape_model.h5")
 img_size = (64, 64)  # Tamaño esperado por el modelo
