@@ -20,9 +20,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-
-
 # Cargar modelo una sola vez
 model = load_model("grape_model.h5")
 img_size = (64, 64)  # Tamaño esperado por el modelo
@@ -41,3 +38,7 @@ async def predict(file: UploadFile = File(...)):
         "prediction": predicted_class,
         "probabilities": prediction.tolist()
     }
+
+@app.get("/predict")
+def read_root():
+    return {"status": "API activa", "mensaje": "Modelo de uvas cargado correctamente"}
