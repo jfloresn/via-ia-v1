@@ -42,3 +42,4 @@ async def predict(file: UploadFile = File(...)):
 @app.get("/predict")
 def read_root():
     return {"status": "API activa", "mensaje": "Modelo de uvas cargado correctamente"}
+
