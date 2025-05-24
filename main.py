@@ -9,7 +9,8 @@ app = FastAPI()
 
 # Orígenes permitidos (Angular local, puedes agregar más)
 origins = [
-    "http://localhost:4200"
+    "http://localhost:4200",
+    "https://cognitivetechsolution.com"
 ]
 
 # Middleware CORS
@@ -21,13 +22,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Cargar el modelo una sola vez
-model = load_model("grape_model.h5")
-img_size = (64, 64)  # Tamaño de imagen esperado
+# Endpoint de verificación (GET)
+@app.get("/")
+def read_root():
+    return {"status": "API activa", "mensaje": "Modelo de uvas cargado correctamente"}
+
 
 # Endpoint de predicción
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
+    # Cargar el modelo una sola vez
+    model = load_model("grape_model.h5")
+    img_size = (64, 64)  # Tamaño de imagen esperado
     # Leer imagen
     image = Image.open(io.BytesIO(await file.read())).convert("RGB")
     image = image.resize(img_size)
@@ -43,7 +49,3 @@ async def predict(file: UploadFile = File(...)):
         "probabilities": prediction.tolist()
     }
 
-# Endpoint de verificación (GET)
-@app.get("/")
-def read_root():
-    return {"status": "API activa", "mensaje": "Modelo de uvas cargado correctamente"}

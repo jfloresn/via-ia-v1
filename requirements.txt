@@ -1,5 +1,6 @@
-fastapi
-uvicorn[standard]
-tensorflow-cpu==2.10.1
-numpy
-pillow
+tensorflow-macos==2.10.0
+tensorflow-metal==0.6.0         # Opcional: solo si usas aceleración por GPU en Mac
+keras==2.10.0
+protobuf==3.19.6
+tensorboard==2.10.1
+numpy==1.24.3
